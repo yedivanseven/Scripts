@@ -983,13 +983,9 @@ The same is true if we wanted to predict the probability mass function for a new
 \begin{equation} \label{eq:post_pred_Y}
 P(Y^*|X^*, \mathcal{D}) = \int\mathrm{d}\theta_\mathrm{y}\,P(Y^*|\theta_\mathrm{y}, X^*)P(\theta_\mathrm{y}|\mathcal{D}, X^*)
 \end{equation}
-Again, Eq.\,\ref{eq:post_pred_Y} is actually many equations, one for every value $x^*$ that $X^*$ can take. Multiplying with Eq.\,\ref{eq:post_pred_X},
-\begin{equation}
-P(Y^*, X^*|\mathcal{D}) = P(Y^*|X^*, \mathcal{D})P(X^*|\mathcal{D})
-\end{equation}
-we get the joint posterior predictive,
+Again, Eq.\,\ref{eq:post_pred_Y} is actually many equations, one for every value $x^*$ that $X^*$ can take. Multiplying with Eq.\,\ref{eq:post_pred_X}, we get the joint posterior predictive,
 \begin{equation} \label{eq:post_pred_joint}
-P(Y^*, X^*|\mathcal{D}) = \int\mathrm{d}\theta_\mathrm{y}\mathrm{d}\theta_\mathrm{x}\,P(Y^*|\theta_\mathrm{y}, X^*)P(\theta_\mathrm{y}|\mathcal{D}, X^*)P(X^*|\theta_\mathrm{x})P(\theta_\mathrm{x}|\mathcal{D})
+P(Y^*, X^*|\mathcal{D}) = P(Y^*|X^*, \mathcal{D})P(X^*|\mathcal{D})
 \end{equation}
 and that for a new observation $X^*$ given a certain value of $Y^*$.
 \begin{equation} \label{eq:post_pred_XY}
