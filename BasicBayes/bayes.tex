@@ -32,7 +32,7 @@ Strictly speaking, this graph illustrates the situation where $P(X)$ is given in
 	\caption{A single random variable $X$, whose probability mass function is parameterized by $\theta$, which is itself a random variate.}
 	\label{fig:1var1param}
 \end{figure}
-However, because the nodes in belief networks represent probability mass functions (or densities), not numbers, this graph represents a joint probability distribution $P(X, \theta ) $ of \emph{two} random variables, not just one. In fact, what we have drawn designates $\theta$ as a (usually continuous) random variate as well. Furthermore, the graph encodes a particular factorization of the joint probability distribution.
+However, because the nodes in belief networks represent probability mass functions (or densities), not numbers, this graph represents a joint probability distribution $P(X, \theta ) $ of \emph{two} random variables, not just one. So, what we have drawn designates $\theta$ as a (usually continuous) random variate as well. Furthermore, the graph encodes a particular factorization of the joint probability distribution.
 \begin{equation}
 P( X, \theta)
 =
@@ -642,7 +642,7 @@ lhs
 = 
 \left\{
 	\prod_{i=1}^{N}
-		P( Y_\mathrm{i} | \theta_\mathrm{y}, X_\mathrm{i} )
+		P( Y_\mathrm{i} | \theta_\mathrm{y}, X_\mathrm{i}, X^* )
 \right\}
 P( \theta_\mathrm{y} | X^* )
 \left\{
@@ -668,7 +668,7 @@ P( \theta_\mathrm{y} | \{Y_\mathrm{i}\}, \{X_\mathrm{i}\}, X^* )
 	{
 		P( \theta_\mathrm{y} | X^* )
 		\prod_{i=1}^{N}
-			P( Y_\mathrm{i} | \theta_\mathrm{y}, X_\mathrm{i} )
+			P( Y_\mathrm{i} | \theta_\mathrm{y}, X_\mathrm{i}, X^*)
 	}
 	{
 		P( \{Y_\mathrm{i}\} | \{X_\mathrm{i}\}, X^* )
@@ -763,7 +763,7 @@ num
 	{
 		\pi_\mathrm{j}( \theta_\mathrm{y} )
 	}^{
-		[ X^* = x_\mathrm{k} ]
+		[ X^* = x_\mathrm{j} ]
 	}
 \prod_{i=1}^{N}
 	\left\{
@@ -773,7 +773,9 @@ num
 			}^{
 			[ X_\mathrm{i} = x_\mathrm{k} ]
 		}
-	\right\}
+	\right\}^{
+		[ X_\mathrm{i} = X^* ]
+	}
 \end{equation}
 Rearranging the products, we get,
 \begin{align}
@@ -868,16 +870,26 @@ P( \theta_\mathrm{y} | \{ \mathsf{y}_\mathrm{i} \}, \{ \mathsf{x}_\mathrm{i} \},
 	} 
 \end{align}
 Introducing again $\mathcal{D}_\mathrm{y} = \{ \mathsf{y}_\mathrm{i} \} $, $\mathcal{D}_\mathrm{x} = \{ \mathsf{x}_\mathrm{i} \} $, and $\mathcal{D} = \{ \mathsf{y}_\mathrm{i}, \mathsf{x}_\mathrm{i} \} $, we could also rewrite this as,
-\begin{equation}
-P( \theta_\mathrm{y} | \mathcal{D}, X ) 
-=
+\begin{align}
+P( \theta_\mathrm{y} | \mathcal{D}, X^* ) 
+&=
+\frac
+	{
+		P( \mathcal{D}_\mathrm{y} | \theta_\mathrm{y}, \mathcal{D}_\mathrm{x}, X^*)
+		P( \theta_\mathrm{y} | X^* )
+	}
+	{
+		P( \mathcal{D}_\mathrm{y}| \mathcal{D}_\mathrm{x}, X^* )
+	}
+\nonumber \\
+&=
 \prod_{k}
 	\Bigl\{
 		p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D} )
 	\Bigr\}^{
 		[ X^* = x_\mathrm{k} ]
 	}
-\end{equation}
+\end{align}
 where the relevant factors are given by:
 \begin{equation}
 p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D} ) 
@@ -898,7 +910,11 @@ p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D} )
 \section{Predicting on new data}
 To predict the probability mass function for a new observation $X^*$, we proceed in exactly the same way as for the single-variable case outlined in Section\,\ref{sect:predict_new} and rewrite Eq.\,\ref{eq:post_pred}.
 \begin{equation} \label{eq:post_pred_X}
-P(X^*|\mathcal{D}) = \int\mathrm{d}\theta_\mathrm{x}\,P(X^*|\theta_\mathrm{x})P(\theta_\mathrm{x}|\mathcal{D})
+P( X^* | \mathcal{D}_\mathrm{x} )
+= 
+\int \mathrm{d}\theta_\mathrm{x} \,
+	P( X^* | \theta_\mathrm{x} )
+	P( \theta_\mathrm{x} | \mathcal{D}_\mathrm{x} )
 \end{equation}
 The same is true if we wanted to predict the probability mass function for a new observation $Y^*$ given a certain value of $X^*$.
 \begin{equation} \label{eq:post_pred_Y}
