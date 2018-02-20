@@ -44,10 +44,10 @@ To recover the (now \emph{marginal}) probability mass function $P(X)$, we would 
 \begin{equation} \label{eq:int}
 P(X)
 = 
-\int \mathrm{d}\theta\,
+\int \mathrm{d}\theta \,
 	P( X, \theta )
 = 
-\int\mathrm{d}\theta\,
+\int\mathrm{d}\theta \,
 	P( X | \theta )
 	P( \theta )
 \end{equation}
@@ -75,8 +75,8 @@ Substituting \ref{eq:delta} into Eq.\,\ref{eq:fact_int} and integrating out $\th
 \begin{equation} \label{eq:param}
 P(X)
 =
-\int \mathrm{d}\theta\,
-	P( X | \theta )\,
+\int \mathrm{d}\theta \,
+	P( X | \theta ) \,
 	\delta( \theta - \theta^* )
 = 
 P( X | \theta^* )
@@ -225,7 +225,7 @@ If, however, we decided to keep the entire posterior distribution of $\theta$, t
 \begin{equation}
 P(X^*)
 =
-\int \mathrm{d}\theta\,
+\int \mathrm{d}\theta \,
 	P( X^* | \theta )
 	P( \theta )
 \end{equation}
@@ -284,7 +284,7 @@ Now integrating over $\theta$ brings us to the formal expression for the \emph{p
 \begin{equation} \label{eq:post_pred}
 P( X^* | \mathcal{D} ) 
 = 
-\int \mathrm{d}\theta\,
+\int \mathrm{d}\theta \,
 	P( X^* | \theta )
 	P( \theta | \mathcal{D} )
 \end{equation}
@@ -581,7 +581,7 @@ P(Y|X)
 &=
 \prod_{k}
 	\left\{
-		\int \mathrm{d}\theta_\mathrm{y}\,
+		\int \mathrm{d}\theta_\mathrm{y} \,
 			p_\mathrm{k}( Y | \theta_\mathrm{y} )
 			\pi_\mathrm{k}( \theta_\mathrm{y} )
 	\right\}^{
