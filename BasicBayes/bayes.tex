@@ -121,14 +121,10 @@ Clearly, if we want to predict the outcome of a future \emph{realization} of $X$
 
 We start with a trivial factorization of the joint probability distribution of all these random variables,
 \begin{equation}
-{
-	P( \theta | X_1, X_2, \ldots, X_\mathrm{N} )
-	P( X_1, X_2, \ldots, X_\mathrm{N} )
-}
+P( \theta | X_1, X_2, \ldots, X_\mathrm{N} )
+P( X_1, X_2, \ldots, X_\mathrm{N} )
 =
-{
-	P( \theta, X_1, X_2, \ldots, X_\mathrm{N} )
-}
+P( \theta, X_1, X_2, \ldots, X_\mathrm{N} )
 \end{equation}
 and divide by the second term on the left-hand side.
 \begin{equation} \label{eq:pre_fact}
@@ -705,8 +701,9 @@ P( \theta_\mathrm{x} | \{X_\mathrm{i}\}, X^* )
 	} 
 \end{equation}
 
+
 \subsubsection{Posterior of $\theta_\mathrm{x}$}
-The appearance of the auxiliary quantity $X$ in Eq.\,\ref{eq:2params_obs_X} is sitting somewhat oddly in the above expression for the posterior of $\theta_\mathrm{x}$. Why should one of the instances of $X$ stick out from the rest? Fortunately, it is not hard to make it disappear. To do so, we multiply with the denominator of the right-hand side,
+The appearance of the auxiliary quantity $X^*$ in Eq.\,\ref{eq:2params_obs_X} is sitting somewhat oddly in the above expression for the posterior of $\theta_\mathrm{x}$. Why should one of the instances of $X$ stick out from the rest? Fortunately, it is not hard to make it disappear. To do so, we multiply with the denominator of the right-hand side,
 \begin{equation}
 P( \theta_\mathrm{x}, \{X_\mathrm{i}\}, X^* ) 
 =
@@ -756,7 +753,7 @@ P( \theta_\mathrm{x} | \{ \mathsf{x}_\mathrm{i} \} )
 		P( \{ \mathsf{x}_\mathrm{i} \} )
 	} 
 \end{equation}
-If we denote, as before, $ \{ \mathsf{x}_\mathrm{i} \} = \mathcal{D}_\mathrm{x}$, we finally end up with the familiar expression for the posterior of $\theta_\mathrm{x}$.
+If we denote, as before, $ \{ \mathsf{x}_\mathrm{i} \} = \mathcal{D}_\mathrm{x}$, we finally end up with the familiar expression for the posterior of $\theta_\mathrm{x}$,
 \begin{equation}
 P( \theta_\mathrm{x} | \mathcal{D}_\mathrm{x} ) 
 = 
@@ -769,6 +766,15 @@ P( \theta_\mathrm{x} | \mathcal{D}_\mathrm{x} )
 		P( \mathcal{D}_\mathrm{x} )
 	} 
 \end{equation}
+where:
+\begin{equation}
+P( \mathcal{D}_\mathrm{x} )
+=
+\int \mathrm{d}\theta_\mathrm{x} \,
+	P( \mathcal{D}_\mathrm{x} | \theta_\mathrm{x} )
+	P( \theta_\mathrm{x} )
+\end{equation}
+
 
 \subsubsection{Posterior(s) of $\theta_\mathrm{y}$}
 To make sense of Eq.\,\ref{eq:2params_obs_Y}, we first plug Eqs.\,\ref{eq:2param_likelihood_Y} and \ref{eq:2param_prior_Y} into the numerator ($num$) of the right-hand side,
@@ -830,7 +836,7 @@ num
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
 		\prod_{i=1}^{N}
 			{
-				p_\mathrm{k}( Y_\mathrm{i} |\theta_\mathrm{y} )
+				p_\mathrm{k}( Y_\mathrm{i} | \theta_\mathrm{y} )
 			}
 			^
 			{
@@ -847,7 +853,10 @@ num
 	\Bigl\{
 		p_\mathrm{k}
 			\bigl(
-				\left\{ Y_\mathrm{i} | X_\mathrm{i} = x_\mathrm{k} \right\} |
+				\left\{ 
+					Y_\mathrm{i} | 
+					X_\mathrm{i} = x_\mathrm{k} 
+				\right\} |
 				\theta_\mathrm{y}
 			\bigr) \,
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
@@ -867,7 +876,8 @@ den
 			\pi_\mathrm{k}( \theta_\mathrm{y} )
 			\prod_{i=1}^{N}
 				{
-					p_\mathrm{k}( Y_\mathrm{i} | \theta_\mathrm{y} )
+					p_\mathrm{k}( Y_\mathrm{i} | 
+					\theta_\mathrm{y} )
 				}
 				^
 				{
@@ -884,7 +894,10 @@ den
 	\Bigl\{
 		p_\mathrm{k}
 			\bigl(
-			\left\{ Y_\mathrm{i} | X_\mathrm{i} = x_\mathrm{k} \right\}
+				\left\{
+					 Y_\mathrm{i} | 
+					 X_\mathrm{i} = x_\mathrm{k} 
+				\right\}
 			\bigr)
 	\Bigr\}
 	^
@@ -948,7 +961,11 @@ P( \theta_\mathrm{y} | \mathcal{D}, X^* )
 =
 \prod_{k}
 	\Bigl\{
-		p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D}_\mathrm{y}^{\,k} )
+		p_\mathrm{k}
+			(
+				\theta_\mathrm{y} |
+				\mathcal{D}_\mathrm{y}^{\,k} 
+			)
 	\Bigr\}
 	^
 	{
@@ -961,7 +978,11 @@ p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D}_\mathrm{y}^{\,k} )
 =
 \frac
 	{
-		p_\mathrm{k}( \mathcal{D}_\mathrm{y}^{\,k} | \theta_\mathrm{y} )
+		p_\mathrm{k}
+			(
+				\mathcal{D}_\mathrm{y}^{\,k} |
+				\theta_\mathrm{y}
+			)
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
 	}
 	{
@@ -969,7 +990,7 @@ p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D}_\mathrm{y}^{\,k} )
 	}
 \end{equation}
 
-\section*{Proceed at your own risk from here!}
+
 \section{Predicting on new data}
 To predict the probability mass function for a new observation $X^*$, we proceed in exactly the same way as for the single-variable case outlined in Section\,\ref{sect:predict_new} and rewrite Eq.\,\ref{eq:post_pred}.
 \begin{equation} \label{eq:post_pred_X}
@@ -998,6 +1019,7 @@ P(Y^*|\mathcal{D}) = \sum_{k}P(Y^*, x_\mathrm{k}|\mathcal{D})
 
 We note in passing that, if the discrete random variable $X$ is relabeled $C$ and "\ldots has the value $x$." is substituted with "\ldots belongs to class $c$.", then Eq.\,\ref{eq:post_pred_XY} describes the recipe for predicting the \emph{class probabilities} of new observation $Y^*$, and \emph{classification} would mean assigning it to the class $c^*$ with the highest probability.
 
+
 \section{Hyperparameters}
 Now that we understand the case of two dependent, parameterized random variables, we might want to include the possibility of specifying the (prior) distributions of these parameters with \emph{hyperparameters}. Like in Fig.\,\ref{fig:1var1param2const}, adding two of them (why not $\alpha$ and $\beta$) for $\theta_\mathrm{x}$ is straightforward. When we want to express our prior belief about $\theta_\mathrm{y}$, however, we should reserve the option to specify different parameters (why not $\mu$ and $\nu$) for each value $x$ that $X$ can take. This means adding an arrow from $X$ to $\mu$ and $\nu$, as shown in Fig.\,\ref{fig:2var2param4const}.
 \begin{figure}[h]
@@ -1009,6 +1031,7 @@ Now that we understand the case of two dependent, parameterized random variables
 
 Without going through every step of our derivation again, we list here only how introducing hyperparameters changes a few key formulas.
 
+
 \section{Bayesian hypothesis test}
 Suppose $X$ is a binary random variable, representing if a patient has recieved a certain treatment or not, and $Y$ is also binary random variable, indicating whether patient's symptoms disappeared or not. Our goal is then to learn the distributions of the parameters, $\theta_\mathrm{x}$ and $\theta_\mathrm{y}$, describing the probabilities of $X$ and $Y$ occurring, respectively.
 
@@ -1017,6 +1040,7 @@ As we are dealing with binary variables, we can chose between a \emph{Beta-Berno
 
 \chapter{Good Things Come in 3's}
 Example binary classification
+
 
 \chapter{Continuous Variables}
 Density vs. mass function and the mystery of observation and hidden variables.
