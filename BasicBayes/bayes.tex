@@ -535,7 +535,9 @@ P( Y | \theta_\mathrm{y}, X )
 \prod_{k}
 	{
 		p_\mathrm{k}( Y | \theta_\mathrm{y} )
-	}^{
+	}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \end{equation} 
@@ -548,7 +550,9 @@ P( \theta_\mathrm{y} | X )
 \prod_{k}
 	{
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
-	}^{
+	}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \end{equation}
@@ -561,7 +565,9 @@ P( \theta_\mathrm{y} | X )
 	\Bigl\{
 		p_\mathrm{k}( Y | \theta_\mathrm{y} )
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
-	\Bigr\}^{
+	\Bigr\}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \end{equation}
@@ -574,7 +580,9 @@ P(Y|X)
 		\Bigl\{
 			p_\mathrm{k}( Y | \theta_\mathrm{y} )
 			\pi_\mathrm{k}( \theta_\mathrm{y} )
-		\Bigr\}^{
+		\Bigr\}
+		^
+		{
 			[ X = x_\mathrm{k} ]
 		}
 \nonumber \\ 
@@ -584,7 +592,9 @@ P(Y|X)
 		\int \mathrm{d}\theta_\mathrm{y} \,
 			p_\mathrm{k}( Y | \theta_\mathrm{y} )
 			\pi_\mathrm{k}( \theta_\mathrm{y} )
-	\right\}^{
+	\right\}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \\
@@ -592,7 +602,9 @@ P(Y|X)
 \prod_{k}
 	{
 		p_\mathrm{k}( Y )
-	}^{
+	}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \nonumber
@@ -611,7 +623,9 @@ P( \theta_\mathrm{y} |Y, X )
 			{
 				p_\mathrm{k}( Y )
 			}
-	\right\}^{
+	\right\}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \nonumber \\
@@ -619,7 +633,9 @@ P( \theta_\mathrm{y} |Y, X )
 \prod_{k}
 	{
 		p_\mathrm{k}( \theta_\mathrm{y} | Y )
-	}^{
+	}
+	^
+	{
 		[ X = x_\mathrm{k} ]
 	}
 \end{align}
@@ -755,31 +771,59 @@ P( \theta_\mathrm{x} | \mathcal{D}_\mathrm{x} )
 \end{equation}
 
 \subsubsection{Posterior(s) of $\theta_\mathrm{y}$}
-To make sense of Eq.\,\ref{eq:2params_obs_Y}, we first plug Eqs.\,\ref{eq:2param_likelihood_Y} and \ref{eq:2param_prior_Y} into the numerator ($num$) of the right-hand side.
-\begin{equation}
+To make sense of Eq.\,\ref{eq:2params_obs_Y}, we first plug Eqs.\,\ref{eq:2param_likelihood_Y} and \ref{eq:2param_prior_Y} into the numerator ($num$) of the right-hand side,
+\begin{align}
 num 
-=
-\prod_{j}
+&=
+\prod_{k}
 	{
-		\pi_\mathrm{j}( \theta_\mathrm{y} )
-	}^{
-		[ X^* = x_\mathrm{j} ]
+		\pi_\mathrm{k}( \theta_\mathrm{y} )
+	}
+    ^
+    {
+		[ X^* = x_\mathrm{k} ]
 	}
 \prod_{i=1}^{N}
 	\left\{
 		\prod_{k}
 			{
 				p_\mathrm{k}( Y_\mathrm{i} | \theta_\mathrm{y} )
-			}^{
-			[ X_\mathrm{i} = x_\mathrm{k} ]
-		}
-	\right\}^{
+			}
+		    ^
+		    {
+				[ X_\mathrm{i} = x_\mathrm{k} ]
+			}
+	\right\}
+	^
+	{
 		[ X_\mathrm{i} = X^* ]
 	}
-\end{equation}
-Rearranging the products, we get,
-\begin{align}
-num 
+\nonumber \\
+&=
+\prod_{k}
+	{
+		\pi_\mathrm{k}( \theta_\mathrm{y} )
+	}
+    ^
+    {
+		[ X^* = x_\mathrm{k} ]
+	}
+\prod_{k}
+	\left\{
+		\prod_{i=1}^{N}
+			{
+				p_\mathrm{k}( Y_\mathrm{i} | \theta_\mathrm{y} )
+			}
+			^
+			{
+				[ X_\mathrm{i} = x_\mathrm{k} ]
+			}
+	\right\}
+	^
+	{
+		[ X^* = x_\mathrm{k} ]
+	}
+\nonumber \\
 &=
 \prod_{k}
 	\left\{
@@ -787,23 +831,29 @@ num
 		\prod_{i=1}^{N}
 			{
 				p_\mathrm{k}( Y_\mathrm{i} |\theta_\mathrm{y} )
-			}^{
+			}
+			^
+			{
 				[ X_\mathrm{i} = x_\mathrm{k} ]
 			}
-	\right\}^{
+	\right\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	}
 \nonumber \\
 &\stackrel{!}{=}
 \prod_{k}
 	\Bigl\{
-		p_\mathrm{k}(
-			\left\{ Y_\mathrm{i} \right\} |
-			\theta_\mathrm{y},
-			\left\{ X_\mathrm{i} \right\}
-		)
+		p_\mathrm{k}
+			\bigl(
+				\left\{ Y_\mathrm{i} | X_\mathrm{i} = x_\mathrm{k} \right\} |
+				\theta_\mathrm{y}
+			\bigr) \,
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
-	\Bigr\}^{
+	\Bigr\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	}
 \end{align}
@@ -818,18 +868,27 @@ den
 			\prod_{i=1}^{N}
 				{
 					p_\mathrm{k}( Y_\mathrm{i} | \theta_\mathrm{y} )
-				}^{
+				}
+				^
+				{
 					[ X_\mathrm{i} = x_\mathrm{k} ]
 				}
-	\right\}^{
+	\right\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	} 
 \nonumber \\
 &\stackrel{!}{=}
 \prod_{k}
 	\Bigl\{
-		p_\mathrm{k}( \left\{ Y_\mathrm{i} \right\} | \left\{ X_\mathrm{i} \right\} )
-	\Bigr\}^{
+		p_\mathrm{k}
+			\bigl(
+			\left\{ Y_\mathrm{i} | X_\mathrm{i} = x_\mathrm{k} \right\}
+			\bigr)
+	\Bigr\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	}
 \end{align}
@@ -841,68 +900,72 @@ P( \theta_\mathrm{y} | \{ \mathsf{y}_\mathrm{i} \}, \{ \mathsf{x}_\mathrm{i} \},
 	\left\{
 		\frac
 			{
-				p_\mathrm{k}(
-					\left\{ \mathsf{y}_\mathrm{i} \right\} |
-					\theta_\mathrm{y}, 
-					\left\{ \mathsf{x}_\mathrm{i} \right\}
-				)
+				p_\mathrm{k}
+					\bigl(
+						\left\{ 
+							\mathsf{y}_\mathrm{i} | 
+							\mathsf{x}_\mathrm{i} = x_\mathrm{k}
+						\right\} |
+						\theta_\mathrm{y}
+					\bigr)
 				\pi_\mathrm{k}( \theta_\mathrm{y} )
 			}
 			{
-				p_\mathrm{k}(
-					\left\{ \mathsf{y}_\mathrm{i} \right\} |
-					\left\{ \mathsf{x}_\mathrm{i} \right\} )
+				p_\mathrm{k}
+					\bigl(
+						\left\{
+							\mathsf{y}_\mathrm{i} | 
+							\mathsf{x}_\mathrm{i} = x_\mathrm{k}
+						\right\} 
+					\bigr)
 			}
-	\right\}^{
+	\right\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	}
 \nonumber \\
 &\stackrel{!}{=}
 \prod_{k}
 	\Bigl\{
-		p_\mathrm{k}(
-			\theta_\mathrm{y} |
-			\left\{ \mathsf{y}_\mathrm{i} \right\},
-			\left\{ \mathsf{x}_\mathrm{i} \right\}
-		)
-	\Bigr\}^{
+		p_\mathrm{k}
+			\bigl(
+				\theta_\mathrm{y} |
+				\left\{
+					\mathsf{y}_\mathrm{i} |
+					\mathsf{x}_\mathrm{i} = x_\mathrm{k}
+				\right\}
+			\bigr)
+	\Bigr\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	} 
 \end{align}
-Introducing again $\mathcal{D}_\mathrm{y} = \{ \mathsf{y}_\mathrm{i} \} $, $\mathcal{D}_\mathrm{x} = \{ \mathsf{x}_\mathrm{i} \} $, and $\mathcal{D} = \{ \mathsf{y}_\mathrm{i}, \mathsf{x}_\mathrm{i} \} $, we could also rewrite this as,
-\begin{align}
+Introducing $\mathcal{D}_\mathrm{y}^{\,k} = \{ \mathsf{y}_\mathrm{i} | \mathsf{x}_\mathrm{i} = x_\mathrm{k} \} $, we could also rewrite this as,
+\begin{equation}
 P( \theta_\mathrm{y} | \mathcal{D}, X^* ) 
-&=
-\frac
-	{
-		P( \mathcal{D}_\mathrm{y} | \theta_\mathrm{y}, \mathcal{D}_\mathrm{x}, X^*)
-		P( \theta_\mathrm{y} | X^* )
-	}
-	{
-		P( \mathcal{D}_\mathrm{y}| \mathcal{D}_\mathrm{x}, X^* )
-	}
-\nonumber \\
-&=
+=
 \prod_{k}
 	\Bigl\{
-		p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D} )
-	\Bigr\}^{
+		p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D}_\mathrm{y}^{\,k} )
+	\Bigr\}
+	^
+	{
 		[ X^* = x_\mathrm{k} ]
 	}
-\end{align}
+\end{equation}
 where the relevant factors are given by:
 \begin{equation}
-p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D} ) 
+p_\mathrm{k}( \theta_\mathrm{y} | \mathcal{D}_\mathrm{y}^{\,k} ) 
 =
 \frac
 	{
-		p_\mathrm{k}( \mathcal{D}_\mathrm{y} |
-			\theta_\mathrm{y}, \mathcal{D}_\mathrm{x}
-		)
+		p_\mathrm{k}( \mathcal{D}_\mathrm{y}^{\,k} | \theta_\mathrm{y} )
 		\pi_\mathrm{k}( \theta_\mathrm{y} )
 	}
 	{
-		p_\mathrm{k}( \mathcal{D}_\mathrm{y} | \mathcal{D}_\mathrm{x} )
+		p_\mathrm{k}( \mathcal{D}_\mathrm{y}^{\,k} )
 	}
 \end{equation}
 
